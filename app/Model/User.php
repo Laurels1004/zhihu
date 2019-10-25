@@ -26,31 +26,33 @@ class User extends Model
         $username = $request_user_check[0];
         $password = $request_user_check[1];
 
-        /*检查用户名是否存在*/
-        $user = $this
-            ->where('username', $username)
-            ->exists();
+        /*使用laravel自带validation类进行传参合法性验证*/
 
-        if($user)
+        /*检查用户名是否存在*/
+        if(is_username_exists($username))
             return ['status'=>0, 'msg'=>'用户名已存在!'];
 
         /*加密密码--使用Hash::make()加密密码,需use Hash*/
         $hashed_password = Hash::make($password);
 
-        /*存入数据库*/
+        /*数据入库*/
         $this->password = $hashed_password;
         $this->username = $username;
-        if($this->save())
-            return ['status'=>1, 'id'=>$this->id];
-        else
+
+        if(!$this->save())
             return ['status'=>0, 'msg'=>'用户注册失败!'];
+        return ['status'=>1, 'id'=>$this->id];
+
+        return $this->save() ?
+            ['status'=>1, 'id'=>$this->id] :
+            ['status'=>0, 'msg'=>'用户注册失败!'];
     }
 
     /*登录API*/
     public function signin(){
         /*判断用户是否登录*/
-        if($this->is_signin())
-            return ['status'=>0 ,'msg'=>'用户已登录!'];
+        //if($this->is_signin())
+        //return ['status'=>0 ,'msg'=>'用户已登录!'];
 
         //dd(session('abc'));   /*获取键名为abc的值,没有返回null*/
         //dd(session('abc','bcd')); /*获取键名为abc的值,没有返回bcd*/
@@ -61,10 +63,12 @@ class User extends Model
         $username = $request_user_check[0];
         $password = $request_user_check[1];
 
+        /*使用laravel自带validation类进行传参合法性验证*/
+
         /*检查数据库中是否存在该用户*/
-        $user = $this->where('username', $username)->first();
-        if(!$user)
+        if(!$this->is_user_exists($username))
             return ['status'=>0, 'msg'=>'用户不存在!'];
+        $user = $this->is_user_exists($username);
 
         /*检查用户密码是否正确,使用Hash::check(strintg1,string2)方法*/
         $hashed_password = $user->password;
@@ -111,18 +115,31 @@ class User extends Model
 
     /*检查请求的用户名和密码是否为空*/
     public function has_username_and_passowrd(){
-        $username = Request::get('username');
-        $password = Request::get('password');
+        $username = rq('username');
+        $password = rq('password');
 
         /*用户名或密码为空,返回false,否则返回含有用户名密码的数组*/
-        if($username && $password)
-            return [$username,$password];
-        return false;
+        return $username && $password ?
+            [$username,$password] :
+            false;
     }
 
     /*检查用户是否登录*/
     public function is_signin(){
         /*session中存在uid,返回uid,否则返回false*/
-        return session('uid')?: false;
+        return session('uid') ? : false;
+    }
+
+    /*检查用户是否存在*/
+    public function is_user_exists($username){
+        $user = $this->where('username', $username)->first();
+        return $user ? : false;
+    }
+
+    /*检查用户名是否存在*/
+    public function is_username_exists($username){
+        return $this
+            ->where('username', $username)
+            ->exists();
     }
 }

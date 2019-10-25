@@ -1,27 +1,49 @@
-# Laravel PHP Framework
+# 2019/10/24
+初始化Laravel5.2+Angular.js仿知乎
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+## 常规API调用规则
+-所有的API都以'domain.com/api/xxx'开头
+-API分为两部分,如'domain.com/part_1/part_2'
+    -'part_1'为model名称,如user或question
+    -'part_2'为行为名称(例如CRUD),如'reset_password'
+-CRUD
+    -每个model中都会有增删改查四个基础方法,分别对应add、read、change、remove
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+# 2019/10/25
+Ver0.0.1-用户登录注册模块(后端)
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+##用户(User)模块API说明
+### 用户注册: domain.com/user/signup
+- 字段:
+  - 'username':用户名
+  - 'password':密码
+  - 'id'&'uid'用户id
+- 所需权限 -
+- 传参: 'username'&&'password'
+- 返回状态及数据(0失败,1成功):
+  -  ['status'=>0, 'msg'=>'用户名和密码不可为空!']
+  -  ['status'=>0, 'msg'=>'用户名已存在!']
+  -  ['status'=>0, 'msg'=>'用户注册失败!']
+  -  ['status'=>1, 'id'=>用户id]
 
-## Official Documentation
+### 用户登录: user/signin
+- 字段:
+  - 'username':用户名
+  - 'password':密码
+  - 'id'&'uid'用户id
+- 所需权限 -
+- 传参: 'username'&&'password'
+- 返回状态及数据(0失败,1成功):
+  -  ['status'=>0 ,'msg'=>'用户已登录!']
+  -  ['status'=>0, 'msg'=>'用户名和密码不可为空!']
+  -  ['status'=>0, 'msg'=>'用户不存在!']
+  -  ['status'=>0, 'msg'=>'用户密码错误!']
+  -  ['status'=>0, 'msg'=>'用户注册失败!']
+  -  ['status'=>1, 'id'=>用户id]
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+### 用户登出: user/logout
+- 字段: - 
+- 所需权限 -
+- 传参 - 
+- 返回状态及数据(0失败,1成功):
+  -  ['status'=>1]

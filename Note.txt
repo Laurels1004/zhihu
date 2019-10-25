@@ -1,0 +1,56 @@
+mysql基本操作
+mysql -uroot -p
+create database dbname;
+use dbname;
+
+create table user(
+  id int(10) unsigned not null auto_increment,
+  username varchar(12),
+  password varchar(255) not null,
+  primary key (id),
+  unique key users_username_unique (username)
+) ENGINE=InnoDB;
+
+desc migrations;
+select * form migrations;
+desc table1;
+
+数据表导出
+cmd下:
+mysqldump -uroot -p dbname > newtable.sql
+
+
+migrate创建表操作
+使用make:migration创建migrations文件
+php artisan make:migration create_table_tablename
+
+在所创建的文件中的up方法中使用Schema
+public function up(){
+    Schema::create('tablename',function(Blueprint $table){
+        $table->increments('id'); 
+    });
+}
+使用migrate创建数据表
+php artisan migrate
+
+migrate回滚操作
+在所创建的文件中的down方法使用
+public function down(){
+    Schema::drop('tablename');
+}
+php artisan migrate:rollback;
+
+重命名表
+public function up(){
+    Schema::create('tablename',function(Blueprint $table)
+    {
+        $table->increments('id'); 
+    });
+    Schema::rename('tablename','newtablename');
+}
+public function down(){
+    Schema::drop('newtablename');
+}
+
+migrate预览操作
+php artisan migrate --pretend

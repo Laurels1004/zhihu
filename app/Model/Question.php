@@ -13,6 +13,8 @@ class Question extends Model
             return ['status'=>0, 'msg'=>'用户未登录!'];
         $this->user_id = session('uid');
 
+        /*使用laravel自带validation类进行传参合法性验证*/
+
         /*检查标题是否为空,空返回,不为空存入quesion中*/
         if(!rq('title'))
             return ['status'=>0, 'msg'=>'提问标题不能为空!'];
@@ -21,8 +23,6 @@ class Question extends Model
         /*检查是否有提问描述,有存入question中,没有继续执行*/
         if(rq('desc'))
             $this->desc = rq('desc');
-
-        /*使用laravel自带validation类进行传参合法性验证*/
 
         /*数据入库*/
         return $this->save() ?
@@ -37,14 +37,16 @@ class Question extends Model
         if(!user_ins()->is_signin())
             return ['status'=>0, 'msg'=>'用户未登录!'];
 
+        /*使用laravel自带validation类进行传参合法性验证*/
+
         /*检查是否传递了提问的id*/
         if(!rq('id'))
-            return ['status'=>0, 'msg'=>'提问ID不能为空'];
+            return ['status'=>0, 'msg'=>'需要更新的提问ID不能为空'];
 
         /*检查提问是否存在*/
-        $question = $this->is_question_exists(rq('id'));
+        $question = $this->find(rq('id'));
         if(!$question)
-            return ['status'=>0 ,'msg'=>'提问不存在!'];
+            return ['status'=>0 ,'msg'=>'需要更新的提问不存在!'];
 
         /*检查当前用户是否为提问发起者*/
         if($question->user_id != session('uid'))
@@ -73,7 +75,7 @@ class Question extends Model
             $question = $this->find(rq('id'));
             return $question ?
                 ['status'=>1, 'data'=>$question] :
-                ['status'=>0, 'msg'=>'提问不存在!'];
+                ['status'=>0, 'msg'=>'查看的提问不存在!'];
         } else {
             /*不传递指定的提问id,返回查询到的所有提问*/
             /*$limit-设置一页显示数量*/
@@ -86,6 +88,9 @@ class Question extends Model
              * orderBy('col1','col2',..., 'DESC')-通过指定字段来排序
              * limit()-显示数量
              * skip()-偏移量
+             * get()-将所有查询条件转换成collection(与数组相似,是一个对象,具有强大的处理数组的功能)
+             * get(['col1','col2'])-可指定取出的字段
+             * keyBy()-以指定字段作为键,可将源get()所得的数组转换为json对象
              * */
             $questions = $this
                 ->orderBy('created_at', 'ASC')
@@ -93,12 +98,6 @@ class Question extends Model
                 ->skip($skip)
                 ->get(['id', 'title', 'desc', 'user_id', 'created_at', 'updated_at'])
                 ->keyBy('id');
-
-            /**
-             * get()-将所有查询条件转换成collection(与数组相似,是一个对象,具有强大的处理数组的功能)
-             * get(['col1','col2'])-可指定取出的字段
-             * keyBy()-以指定字段作为键,可将源get()所得的数组转换为json对象
-            **/
 
             return ['status'=>1, 'data'=>$questions];
         }
@@ -113,28 +112,26 @@ class Question extends Model
 
         /*检查是否传递了提问的id*/
         if(!rq('id'))
-            return ['status'=>0, 'msg'=>'提问id不能为空'];
+            return ['status'=>0, 'msg'=>'需要删除的提问ID不能为空'];
 
         /*检查提问是否存在*/
-        $question = $this->is_question_exists(rq('id'));
+        $question = $this->find(rq('id'));
         if(!$question)
-            return ['status'=>0 ,'msg'=>'提问不存在!'];
+            return ['status'=>0 ,'msg'=>'需要删除的提问不存在!'];
 
         /*检查当前用户是否是提问发起者*/
         if(session('uid') != $question->user_id)
-            return ['status'=>0, '非提问发起者不能对该提问进行删除!'];
+            return ['status'=>0, 'msg'=>'非提问发起者不能对该提问进行删除!'];
 
-        /*数据删除*/
+        /*删除该提问下的所有回答*/
+        answer_ins()->where('question_id', rq('id'))->delete();
+
+        /*删除该提问下的所有评论*/
+        comment_ins()->where('question_id', rq('id'))->delete();
+
+        /*删除提问*/
         return $question->delete() ?
             ['status'=>1] :
             ['status'=>0, 'msg'=>'提问删除失败!'];
-
-    }
-
-
-    /*检查提问是否存在*/
-    public function is_question_exists($question_id){
-        $question = $this->find($question_id);
-        return $question ? : false;
     }
 }

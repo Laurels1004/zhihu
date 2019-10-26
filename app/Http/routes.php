@@ -35,12 +35,17 @@ function user_ins(){
 
 /*实例化question对象*/
 function question_ins(){
-    return new App\Model\Question;
+    return new \App\Model\Question();
 }
 
 /*实例化answer对象*/
 function answer_ins(){
-    return new App\Model\Answer();
+    return new \App\Model\Answer();
+}
+
+/*实例化comment对象*/
+function comment_ins(){
+    return new \App\Model\Comment();
 }
 
 /*api:面向客户端的接口,接口不限制客户端访问方式,可为get可为post
@@ -72,6 +77,12 @@ Route::any('user/signin', function(){
 /*用户登出*/
 Route::any('user/logout', function(){
     return user_ins()->logout();
+});
+
+
+/*判断用户名是否存在*/
+Route::any('user/is_uname_exist', function(){
+    return user_ins()->is_username_exist();
 });
 
 
@@ -114,6 +125,29 @@ Route::any('answer/read', function(){
 });
 
 /*删除回答*/
+Route::any('answer/remove', function(){
+    return answer_ins()->remove();
+});
+
+
+/*评论API*/
+/*创建评论*/
+Route::any('comment/add', function(){
+    return comment_ins()->add();
+});
+
+/*更新评论*/
+
+
+/*查看评论*/
+Route::any('comment/read', function(){
+    return comment_ins()->read();
+});
+
+/*删除评论*/
+Route::any('comment/remove', function(){
+    return comment_ins()->remove();
+});
 
 
 
@@ -121,11 +155,13 @@ Route::any('answer/read', function(){
 Route::any('test', function(){
 //    dd(user_ins()->is_signin());
 //    dd(question_ins()->test());
-    $a = false;
-    $b = 1;
-    if(!$a && !$b){
-        dd(1);
-    } else {
-        dd(!$b);
-    }
+//    $a = false;
+//    $b = 1;
+//    if(!$a && !$b){
+//        dd(1);
+//    } else {
+//        dd(!$b);
+//    }
+
+    dd(user_ins()->is_username_exists('test123'));
 });

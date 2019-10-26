@@ -18,6 +18,8 @@ class User extends Model
         /*Request::all->获取所有请求数据,返回值:请求参数的数组;*/
         //dd(Request::all());
 
+        /*使用laravel自带validation类进行传参合法性验证*/
+
         /*检查用户名和密码是否为空*/
         //if(!Request::get('username') && !Request::get('password'))
         $request_user_check = $this->has_username_and_passowrd();
@@ -26,10 +28,11 @@ class User extends Model
         $username = $request_user_check[0];
         $password = $request_user_check[1];
 
-        /*使用laravel自带validation类进行传参合法性验证*/
-
         /*检查用户名是否存在*/
-        if($this->is_username_exists($username))
+        if($this
+            ->where('username', rq('username'))
+            ->exists()
+        )
             return ['status'=>0, 'msg'=>'用户名已存在!'];
 
         /*加密密码--使用Hash::make()加密密码,需use Hash*/
@@ -38,11 +41,9 @@ class User extends Model
         /*数据入库*/
         $this->password = $hashed_password;
         $this->username = $username;
-
-        if(!$this->save())
+        /*if(!$this->save())
             return ['status'=>0, 'msg'=>'用户注册失败!'];
-        return ['status'=>1, 'id'=>$this->id];
-
+        return ['status'=>1, 'id'=>$this->id];*/
         return $this->save() ?
             ['status'=>1, 'id'=>$this->id] :
             ['status'=>0, 'msg'=>'用户注册失败!'];
@@ -56,6 +57,9 @@ class User extends Model
 
         //dd(session('abc'));   /*获取键名为abc的值,没有返回null*/
         //dd(session('abc','bcd')); /*获取键名为abc的值,没有返回bcd*/
+
+        /*使用laravel自带validation类进行传参合法性验证*/
+
         /*检查用户名和密码是否为空*/
         $request_user_check = $this->has_username_and_passowrd();
         if(!$request_user_check)
@@ -63,12 +67,10 @@ class User extends Model
         $username = $request_user_check[0];
         $password = $request_user_check[1];
 
-        /*使用laravel自带validation类进行传参合法性验证*/
-
         /*检查数据库中是否存在该用户*/
-        if(!$this->is_user_exists($username))
+        $user = $this->where('username', $username)->first();
+        if(!$user)
             return ['status'=>0, 'msg'=>'用户不存在!'];
-        $user = $this->is_user_exists($username);
 
         /*检查用户密码是否正确,使用Hash::check(strintg1,string2)方法*/
         $hashed_password = $user->password;
@@ -131,16 +133,26 @@ class User extends Model
     }
 
     /*检查用户是否存在*/
-    public function is_user_exists($username){
+    /*public function is_user_exists($username){
         $user = $this->where('username', $username)->first();
         return $user ? : false;
-    }
+    }*/
 
     /*检查用户名是否存在*/
-    public function is_username_exists($username){
+    public function is_username_exist(){
+        /*使用laravel自带validation类进行传参合法性验证*/
+
+        /*检查是否传递了用户名*/
+        if(!rq('username'))
+            return ['status'=>0, 'msg'=>'用户名不能为空!'];
+
+        /*返回值类型-布尔型*/
         $user = $this
-            ->where('username', $username)
+            ->where('username', rq('username'))
             ->exists();
-        return $user;
+
+        return $user ?
+            ['status'=>1, 'msg'=>'用户名已存在!']:
+            ['status'=>0, 'msg'=>'用户名不存在!'];
     }
 }

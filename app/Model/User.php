@@ -11,9 +11,9 @@ class User extends Model
     /*注册API*/
     public function signup(){
         /*dd() -> dump&die*/
-        /*Request::has('key')->判断请求数据中是否含有key,返回值:布尔类型,需use Request;*/
+        /*Request::has('key')->检查请求数据中是否含有key,返回值:布尔类型,需use Request;*/
         //dd(Request::has('username'));
-        /*Request::get('key') ->判断请求数据中是否含有keyname,返回值:value||null*/
+        /*Request::get('key') ->检查请求数据中是否含有keyname,返回值:value||null*/
         //dd(Request::get('username'));
         /*Request::all->获取所有请求数据,返回值:请求参数的数组;*/
         //dd(Request::all());
@@ -29,7 +29,7 @@ class User extends Model
         /*使用laravel自带validation类进行传参合法性验证*/
 
         /*检查用户名是否存在*/
-        if(is_username_exists($username))
+        if($this->is_username_exists($username))
             return ['status'=>0, 'msg'=>'用户名已存在!'];
 
         /*加密密码--使用Hash::make()加密密码,需use Hash*/
@@ -50,7 +50,7 @@ class User extends Model
 
     /*登录API*/
     public function signin(){
-        /*判断用户是否登录*/
+        /*检查用户是否登录*/
         //if($this->is_signin())
         //return ['status'=>0 ,'msg'=>'用户已登录!'];
 
@@ -138,8 +138,9 @@ class User extends Model
 
     /*检查用户名是否存在*/
     public function is_username_exists($username){
-        return $this
+        $user = $this
             ->where('username', $username)
             ->exists();
+        return $user;
     }
 }

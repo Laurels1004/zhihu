@@ -38,6 +38,10 @@ function question_ins(){
     return new App\Model\Question;
 }
 
+/*实例化answer对象*/
+function answer_ins(){
+    return new App\Model\Answer();
+}
 
 /*api:面向客户端的接口,接口不限制客户端访问方式,可为get可为post
     Route::any('api'function(){}); --不限制客户端访问方式
@@ -71,30 +75,57 @@ Route::any('user/logout', function(){
 });
 
 
-/*问题API*/
-/*创建问题--注意:create与laravel中自带的方法名create重复*/
+/*提问API*/
+/*创建提问--注意:create与laravel中自带的方法名create重复*/
 Route::any('question/add', function(){
     return question_ins()->add();
 });
 
-/*更新问题--注意:update与laravel中自带的方法名update重复*/
+/*更新提问--注意:update与laravel中自带的方法名update重复*/
 Route::any('question/change', function(){
     return question_ins()->change();
 });
 
-/*查看问题--注意:show与laravel中自带的方法名show重复*/
+/*查看提问--注意:show与laravel中自带的方法名show重复*/
 Route::any('question/read', function(){
     return question_ins()->read();
 });
 
-/*删除问题*/
+/*删除提问*/
 Route::any('question/remove', function(){
     return question_ins()->remove();
 });
 
 
+/*回答API*/
+/*创建回答*/
+Route::any('answer/add', function(){
+    return answer_ins()->add();
+});
+
+/*更新回答*/
+Route::any('answer/change', function(){
+    return answer_ins()->change();
+});
+
+/*查看回答*/
+Route::any('answer/read', function(){
+    return answer_ins()->read();
+});
+
+/*删除回答*/
+
+
+
 /*测试接口*/
 Route::any('test', function(){
-//    dd(user_ins()->is_signup());
-    dd(question_ins()->test());
+//    dd(user_ins()->is_signin());
+//    dd(question_ins()->test());
+    $a = false;
+    $b = 1;
+    if(!$a && !$b){
+        dd(1);
+    } else {
+        dd(!$b);
+    }
 });

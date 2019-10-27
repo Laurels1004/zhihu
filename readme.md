@@ -20,7 +20,8 @@ Ver0.0.2-用户登录注册模块(后端)
   - 'password':密码
   - 'id'&'uid'用户id
 - 所需权限: -
-- 传参: 必填 'username'&&'password'
+- 传参: 
+  - 必填 'username'&&'password'
 - 返回状态及数据(0失败,1成功):
   -  ['status'=>0, 'msg'=>'用户名和密码不可为空!']
   -  ['status'=>0, 'msg'=>'用户名已存在!']
@@ -33,7 +34,8 @@ Ver0.0.2-用户登录注册模块(后端)
   - 'password':密码
   - 'id'&'uid'用户id
 - 所需权限: -
-- 传参: 必填 'username'&&'password'
+- 传参: 
+  - 必填 'username'&&'password'
 - 返回状态及数据(0失败,1成功):
   -  ['status'=>0, 'msg'=>'用户名和密码不可为空!']
   -  ['status'=>0, 'msg'=>'用户不存在!']
@@ -47,12 +49,24 @@ Ver0.0.2-用户登录注册模块(后端)
 - 返回状态及数据(0失败,1成功):
   -  ['status'=>1]
 
+### 用户个人信息-游客视角: domain.com/user/info
+- 字段: 
+  -  'id' 用户ID 
+- 所需权限: -
+- 传参: 
+  - 必填:'id' 
+- 返回状态及数据(0失败,1成功):
+  -  ['status'=>0, 'msg'=>'用户ID不能为空!']
+  -  ['status'=>0, 'msg'=>'用户不存在!']
+  -  ['status'=>1, 'data'=>用户相关数据]
+
 ### 用户密码修改: domain.com/user/change_password
 - 字段:
   - 'old_pass': 旧密码
   - 'password': 新密码
 - 所需权限: 用户登录
-- 传参: 必填:'old_pass'&'password'; 
+- 传参: 
+  - 必填:'old_pass'&'password'; 
 - 返回状态及数据(0失败,1成功):
   -  ['status'=>0, 'msg'=>'用户未登录!']
   -  ['status'=>0 ,'msg'=>'旧密码与新密码不能为空!']
@@ -60,11 +74,40 @@ Ver0.0.2-用户登录注册模块(后端)
   -  ['status'=>0, 'msg'=>'密码保存失败!']
   -  ['status'=>1]
 
+### 用户密码重置: domain.com/user/reset_password
+- 字段: 
+  -  'phone' 用户手机号 
+- 所需权限: -
+- 传参: 
+  - 必填:'phone' 
+- 返回状态及数据(0失败,1成功):
+  -  ['status'=>0, 'msg'=>'操作过于频繁!']
+  -  ['status'=>0, 'msg'=>'手机号不能为空!']
+  -  ['status'=>0, 'msg'=>'该手机号未注册!']
+  -  ['status'=>0, 'msg'=>'数据更新失败!']
+  -  ['status'=>1]
+
+### 用户密码重置验证: domain.com/user/validate_reset_password
+- 字段: 
+  - 'phone' 用户手机号
+  - 'phone_captcha' 验证码
+  - 'password' 密码
+- 所需权限: -
+- 传参 
+  -  必填:'phone'&'phone_captcha'&'password'
+- 返回状态及数据(0失败,1成功):
+  -  ['status'=>0, 'msg'=>'操作过于频繁!']
+  -  ['status'=>0, 'msg'=>'用户手机号、验证码和密码不能为空!']
+  -  ['status'=>0, 'msg'=>'手机号或验证码错误!']
+  -  ['status'=>0, 'msg'=>'密码修改失败!']
+  -  ['status'=>1]
+
 ### 用户名检测: domain.com/user/is_uname_exist
 - 字段: 
   -  'username':用户名
 - 所需权限: -
-- 传参 - 必填: 'username'
+- 传参 
+  - 必填: 'username'
 - 返回状态及数据:
   - ['status'=>0, 'msg'=>'用户名不能为空!']
   - ['status'=>1, 'msg'=>'用户名已存在!']
@@ -77,7 +120,9 @@ Ver0.0.2-用户登录注册模块(后端)
   - 'title': 提问标题
   - 'desc': 提问描述
 - 所需权限: 用户登录
-- 传参: 必填:'title'; 可选:'desc'
+- 传参: 
+  - 必填:'title'; 
+  - 可选:'desc'
 - 返回状态及数据(0失败,1成功):
   -  ['status'=>0, 'msg'=>'用户未登录!']
   -  ['status'=>0, 'msg'=>'提问标题不能为空']

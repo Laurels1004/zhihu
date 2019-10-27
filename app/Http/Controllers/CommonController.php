@@ -39,7 +39,7 @@ class CommonController extends Controller
 
         /*可通过是否含有question_id这个字段判断是否是问题或回答*/
         return !empty($data) ?
-            ['status'=>1, 'data'=>$data] :
-            ['status'=>0, 'msg'=>'当前模块没有数据!'];
+            suc(['data'=>$data]) :
+            err('当前模块没有数据!');
     }
 }

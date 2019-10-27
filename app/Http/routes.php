@@ -46,10 +46,13 @@ function err($msg=null){
     return ['status'=>0, 'msg'=>$msg];
 }
 
-function suc($data_to_merge = null){
-    $data = ['status'=>1];
+function suc($data_to_merge = []){
+    /*设置status状态,data默认为空*/
+    $data = ['status'=>1, 'data'=>[]];
     if($data_to_merge)
-        $data = array_merge($data, $data_to_merge);
+        /*如果参数中有数据,则使用array_merge合并,(这个数据是一个数组形式,如['data'=>$data])*/
+        $data['data'] = array_merge($data['data'], $data_to_merge);
+    /*参数中没有数据时,则直接返回['status'=>1, 'data'=>[]]*/
     return $data;
 }
 
@@ -83,7 +86,7 @@ Route::any('api',function(){
     /*浏览器Content-Type: text/html; charset=UTF-8*/
 
     /*返回一个数组,laravel默认会将数组转为JSON*/
-    return ['version'=>'0.0.1','developer'=>'laurels1004'];
+    return ['version'=>'0.0.6','developer'=>'laurels1004'];
     /*浏览器Content-Type: application/json*/
 });
 
@@ -104,10 +107,26 @@ Route::any('user/logout', function(){
     return user_ins()->logout();
 });
 
+/*用户个人信息-游客视角*/
+Route::any('user/info', function(){
+    return user_ins()->info();
+});
+
 /*用户密码修改*/
 Route::any('user/change_password', function(){
     return user_ins()->change_password();
 });
+
+/*用户密码重置*/
+Route::any('user/reset_password', function(){
+    return user_ins()->reset_password();
+});
+
+/*用户密码重置验证*/
+Route::any('user/validate_reset_password', function(){
+    return user_ins()->validate_reset_password();
+});
+
 
 /*判断用户名是否存在*/
 Route::any('user/is_uname_exist', function(){
@@ -187,6 +206,8 @@ Route::any('comment/remove', function(){
 /*时间线*/
 Route::any('timeline', 'CommonController@timeline');
 
+
+
 /*测试接口*/
 Route::any('test', function(){
 //    dd(user_ins()->is_signin());
@@ -199,5 +220,8 @@ Route::any('test', function(){
 //        dd(!$b);
 //    }
 
-    dd(user_ins()->is_username_exists('test123'));
+//    dd(user_ins()->is_username_exists('test123'));
+    $a = ['data'=>'123'];
+    $b = ['status'=> '1'];
+    dd(array_merge($a,$b));
 });

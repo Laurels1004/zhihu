@@ -1248,56 +1248,62 @@ vote</ColNames>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="306" parent="257" name="password">
+    <column id="306" parent="257" name="phone_captcha">
       <Position>6</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="307" parent="257" name="intro">
+    <column id="307" parent="257" name="password">
       <Position>7</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="308" parent="257" name="intro">
+      <Position>8</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="308" parent="257" name="created_at">
-      <Position>8</Position>
-      <DataType>timestamp|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="309" parent="257" name="updated_at">
+    <column id="309" parent="257" name="created_at">
       <Position>9</Position>
       <DataType>timestamp|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="310" parent="257" name="users_username_unique">
+    <column id="310" parent="257" name="updated_at">
+      <Position>10</Position>
+      <DataType>timestamp|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="311" parent="257" name="users_username_unique">
       <ColNames>username</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <index id="311" parent="257" name="users_email_unique">
+    <index id="312" parent="257" name="users_email_unique">
       <ColNames>email</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <index id="312" parent="257" name="users_phone_unique">
+    <index id="313" parent="257" name="users_phone_unique">
       <ColNames>phone</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <key id="313" parent="257" name="PRIMARY">
+    <key id="314" parent="257" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="314" parent="257" name="users_username_unique">
+    <key id="315" parent="257" name="users_username_unique">
       <ColNames>username</ColNames>
       <UnderlyingIndexName>users_username_unique</UnderlyingIndexName>
     </key>
-    <key id="315" parent="257" name="users_email_unique">
+    <key id="316" parent="257" name="users_email_unique">
       <ColNames>email</ColNames>
       <UnderlyingIndexName>users_email_unique</UnderlyingIndexName>
     </key>
-    <key id="316" parent="257" name="users_phone_unique">
+    <key id="317" parent="257" name="users_phone_unique">
       <ColNames>phone</ColNames>
       <UnderlyingIndexName>users_phone_unique</UnderlyingIndexName>
     </key>

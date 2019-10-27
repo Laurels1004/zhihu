@@ -10,14 +10,14 @@ class Question extends Model
     public function add(){
         /*检查用户是否登录*/
         if(!user_ins()->is_signin())
-            return ['status'=>0, 'msg'=>'用户未登录!'];
+            return err('用户未登录!');
         $this->user_id = session('uid');
 
         /*使用laravel自带validation类进行传参合法性验证*/
 
         /*检查标题是否为空,空返回,不为空存入quesion中*/
         if(!rq('title'))
-            return ['status'=>0, 'msg'=>'提问标题不能为空!'];
+            return err('提问标题不能为空!');
         $this->title = rq('title');
 
         /*检查是否有提问描述,有存入question中,没有继续执行*/
@@ -26,8 +26,8 @@ class Question extends Model
 
         /*数据入库*/
         return $this->save() ?
-            ['status'=>1, 'id'=>$this->id ] :
-            ['status'=>0, 'msg'=>'提问创建失败!'];
+            suc(['id'=>$this->id ] ):
+            err('提问创建失败!');
     }
 
 
@@ -35,22 +35,22 @@ class Question extends Model
     public function change(){
         /*检查用户是否登录*/
         if(!user_ins()->is_signin())
-            return ['status'=>0, 'msg'=>'用户未登录!'];
+            return err('用户未登录!');
 
         /*使用laravel自带validation类进行传参合法性验证*/
 
         /*检查是否传递了提问的id*/
         if(!rq('id'))
-            return ['status'=>0, 'msg'=>'需要更新的提问ID不能为空'];
+            return err('需要更新的提问ID不能为空');
 
         /*检查提问是否存在*/
         $question = $this->find(rq('id'));
         if(!$question)
-            return ['status'=>0 ,'msg'=>'需要更新的提问不存在!'];
+            return err('需要更新的提问不存在!');
 
         /*检查当前用户是否为提问发起者*/
         if($question->user_id != session('uid'))
-            return ['status'=>0, 'msg'=>'非提问发起者不能对该提问进行修改!'];
+            return err('非提问发起者不能对该提问进行修改!');
 
         /*是否修改了提问标题*/
         if(rq('title'))
@@ -63,8 +63,8 @@ class Question extends Model
 
         /*数据入库*/
         return $question->save() ?
-            ['status'=>1] :
-            ['status'=>0, 'msg'=>'提问更新失败'];
+            suc() :
+            err('提问更新失败');
     }
 
 
@@ -74,8 +74,8 @@ class Question extends Model
         if(rq('id')){
             $question = $this->find(rq('id'));
             return $question ?
-                ['status'=>1, 'data'=>$question] :
-                ['status'=>0, 'msg'=>'查看的提问不存在!'];
+                suc(['data'=>$question]) :
+                err('查看的提问不存在!');
         } else {
             /*不传递指定的提问id,返回查询到的所有提问*/
             /*$limit-设置一页显示数量*/
@@ -105,7 +105,7 @@ class Question extends Model
                 ->get(['id', 'title', 'desc', 'user_id', 'created_at', 'updated_at'])
                 ->keyBy('id');
 
-            return ['status'=>1, 'data'=>$questions];
+            return suc(['data'=>$questions]);
         }
     }
 
@@ -114,20 +114,20 @@ class Question extends Model
     public function remove(){
         /*检查用户是否登录*/
         if(!user_ins()->is_signin())
-            return ['status'=>0, 'msg'=>'用户未登录!'];
+            return err('用户未登录!');
 
         /*检查是否传递了提问的id*/
         if(!rq('id'))
-            return ['status'=>0, 'msg'=>'需要删除的提问ID不能为空'];
+            return err('需要删除的提问ID不能为空');
 
         /*检查提问是否存在*/
         $question = $this->find(rq('id'));
         if(!$question)
-            return ['status'=>0 ,'msg'=>'需要删除的提问不存在!'];
+            return err('需要删除的提问不存在!');
 
         /*检查当前用户是否是提问发起者*/
         if(session('uid') != $question->user_id)
-            return ['status'=>0, 'msg'=>'非提问发起者不能对该提问进行删除!'];
+            return err('非提问发起者不能对该提问进行删除!');
 
         /*删除该提问下的所有回答*/
         answer_ins()->where('question_id', rq('id'))->delete();
@@ -137,7 +137,7 @@ class Question extends Model
 
         /*删除提问*/
         return $question->delete() ?
-            ['status'=>1] :
-            ['status'=>0, 'msg'=>'提问删除失败!'];
+            suc() :
+            err('提问删除失败!');
     }
 }

@@ -59,3 +59,23 @@ migrate预览操作
 php artisan migrate --pretend
 
 
+migration添加表字段
+php artisan make:migration add_filed_newfiled --table=tablename
+    public function up()
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('phone_captcha');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('phone_captcha');
+        });
+    }

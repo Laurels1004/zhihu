@@ -19,6 +19,7 @@ class CreateTable extends Migration
             $table->text('avatar_url')->nullable();   /*头像, 可存储在服务器 CDN 三方服务器*/
             //$table->string('country_code')->default('+86'); /*手机号地区*/
             $table->string('phone')->unique()->nullable();  /*考虑适用范围 国内外 +86*/
+            $table->string('phone_captcha');    /*验证码*/
             $table->string('password',255); /*默认长度255*/
             $table->string('intro')->nullable();    /*简介可为空*/
             $table->timestamps();   /*创建时间(created_at)和更新时间(updated_at)*/

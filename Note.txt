@@ -45,6 +45,9 @@ public function up(){
     Schema::create('tablename',function(Blueprint $table)
     {
         $table->increments('id'); 
+
+        <!-- 外键链接 -->
+        $table->foreign('当前表的外键字段名')->reference('所链接表的字段名')->on('所链接的表名');
     });
     Schema::rename('tablename','newtablename');
 }
@@ -54,3 +57,5 @@ public function down(){
 
 migrate预览操作
 php artisan migrate --pretend
+
+

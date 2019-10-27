@@ -132,4 +132,64 @@ class Answer extends Model
             ['status'=>1] :
             ['status'=>0, 'msg'=>'回答删除失败!'];
     }
+
+    /*回答投票*/
+    public function vote(){
+        /*使用链接表中的新增关系*/
+        /*检查用户是否登录*/
+        if(!user_ins()->is_signin())
+            return ['status'=>0, 'msg'=>'用户未登录!'];
+
+        /*检查是否有回答ID和投票字段*/
+        if(!(rq('id') && rq('vote')))
+            return ['status'=>0, 'msg'=>'回答ID和投票字段不能为空!'];
+
+        /*检查要投票的回答是否存在*/
+        $answer = $this->find(rq('id'));
+        if(!$answer) return ['status'=>0, 'msg'=>'所投票的回答不存在!'];
+
+        /*对投票进行处理 1赞成,2反对*/
+        $vote = rq('vote') <= 1 ? 1 : 2;
+
+        /*检查用户是否已经投过票*/
+        /*newPivotStatement()-进入中间表进行操作,也就是对链接表操作*/
+        $answer->users()
+            ->newPivotStatement()
+            ->where([
+                'user_id'=>session('uid'),
+                'answer_id'=>rq('id')])
+            ->delete();
+
+        /*进行数据添加*/
+        /**
+         * 在之前$this->>find(rq('id'))时laravel就已经将rq('id')传入至实例的answer_id中了
+         * $answer实例下有一个users()方法,这个方法返回一个关系,
+         * 通过关系里的attach()方法,将数据传入链接表
+        **/
+        $answer
+            ->users()
+            ->attach(session('uid'), ['vote'=>$vote]);
+        return ['status'=>1];
+    }
+
+    /* *
+     * 一个用户可给多个回答投票
+     * 一个回答可被多个用户投票
+     * answer : user => N : N 多对多关系
+    * */
+    /*回答关联用户模型*/
+    public function users(){
+        /*
+         * belongsToMany-回答(Answer)属于多个用户(User)
+         * 创建连接表(answers表与users表中间的那张表),将两张表的数据存放至一张表中
+         * 创建表时一般为复数,连接表是个例外须是单数,表名排序按照字母表顺序排序
+         * laravel不知道连接表的新增的字段,除了两个外键字段,如需添加其它字段,先进行声明注册
+         * 使用withPivot()-进行新增字段声明
+         * 使用withTimestamps-如果新增数据或修改数据,timestamps也会更新
+         * */
+        return $this
+            ->belongsToMany('App\Model\User')
+            ->withPivot('vote')
+            ->withTimestamps();
+    }
 }

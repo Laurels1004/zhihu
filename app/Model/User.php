@@ -115,6 +115,32 @@ class User extends Model
         return ['status'=>1];
     }
 
+
+    /*密码修改API*/
+    public function change_password(){
+        /*检查用户是否登录*/
+        if(!$this->is_signin())
+            return ['status'=>0, 'msg'=>'用户未登录!'];
+
+        /*检查是否传递了参数*/
+        if(!(rq('old_pass') && rq('password')))
+            return ['status'=>0 ,'msg'=>'旧密码与新密码不能为空!'];
+
+        /*检查旧密码是否正确*/
+        $user = $this->find(session('uid'));
+        if(!Hash::check(rq('old_pass'), $user->password))
+            return ['status'=>0, 'msg'=>'旧密码输入错误!'];
+
+        /*使用laravel自带validation类进行传参合法性验证*/
+
+        /*加密数据*/
+        $user->password = bcrypt(rq('password'));
+        return $user->save() ?
+            ['status'=>1] :
+            ['status'=>0, 'msg'=>'密码保存失败!'];
+
+    }
+
     /*检查请求的用户名和密码是否为空*/
     public function has_username_and_passowrd(){
         $username = rq('username');
@@ -154,5 +180,13 @@ class User extends Model
         return $user ?
             ['status'=>1, 'msg'=>'用户名已存在!']:
             ['status'=>0, 'msg'=>'用户名不存在!'];
+    }
+
+    /*用户关联回答模型*/
+    public function answers(){
+        return $this
+            ->belongsToMany('App\Model\Answer')
+            ->withPivot('vote')
+            ->withTimestamps();
     }
 }

@@ -28,6 +28,31 @@ function rq($key=null, $default=null){
     return !$key ? Request::all() : Request::get($key, $default);
 }
 
+/**
+ * 分页功能封装
+ * param1:$page-页码
+ * param2:$limit-每页显示数量
+ * return:array($limit, $skip);$skip-偏移量
+ **/
+function pagenate($page=1, $limit=16){
+    $limit = $limit ?: 16;
+    /*$skip-设置偏移量(偏移页数),偏移值为1,跳过$limit的数量*/
+    $skip = ($page? $page - 1: 0) * $limit;
+    return [$limit, $skip];
+}
+
+/*返回值快捷函数封装*/
+function err($msg=null){
+    return ['status'=>0, 'msg'=>$msg];
+}
+
+function suc($data_to_merge = null){
+    $data = ['status'=>1];
+    if($data_to_merge)
+        $data = array_merge($data, $data_to_merge);
+    return $data;
+}
+
 /*实例化user对象*/
 function user_ins(){
     return new App\Model\User;
@@ -35,17 +60,17 @@ function user_ins(){
 
 /*实例化question对象*/
 function question_ins(){
-    return new \App\Model\Question();
+    return new App\Model\Question();
 }
 
 /*实例化answer对象*/
 function answer_ins(){
-    return new \App\Model\Answer();
+    return new App\Model\Answer();
 }
 
 /*实例化comment对象*/
 function comment_ins(){
-    return new \App\Model\Comment();
+    return new App\Model\Comment();
 }
 
 /*api:面向客户端的接口,接口不限制客户端访问方式,可为get可为post
@@ -79,6 +104,10 @@ Route::any('user/logout', function(){
     return user_ins()->logout();
 });
 
+/*用户密码修改*/
+Route::any('user/change_password', function(){
+    return user_ins()->change_password();
+});
 
 /*判断用户名是否存在*/
 Route::any('user/is_uname_exist', function(){
@@ -129,6 +158,10 @@ Route::any('answer/remove', function(){
     return answer_ins()->remove();
 });
 
+/*投票回答*/
+Route::any('answer/vote', function(){
+    return answer_ins()->vote();
+});
 
 /*评论API*/
 /*创建评论*/
@@ -150,6 +183,9 @@ Route::any('comment/remove', function(){
 });
 
 
+/*通用API*/
+/*时间线*/
+Route::any('timeline', 'CommonController@timeline');
 
 /*测试接口*/
 Route::any('test', function(){

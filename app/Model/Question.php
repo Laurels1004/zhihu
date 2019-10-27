@@ -79,9 +79,15 @@ class Question extends Model
         } else {
             /*不传递指定的提问id,返回查询到的所有提问*/
             /*$limit-设置一页显示数量*/
-            $limit = rq('limit')?:15;
+            //$limit = rq('limit')?:15;
             /*$skip-设置偏移量(偏移页数),偏移值为1,跳过$limit的数量*/
-            $skip = (rq('page')? rq('page') - 1: 0) * $limit;
+            //$skip = (rq('page')? rq('page') - 1: 0) * $limit;
+            /* *
+             * list()-将数组中的值传入list()中的变量中
+             * 例如 list($a, ,$c) = array('a','b','c');
+             * 就是将数组中的'a'赋值给变量$a,'c'赋值给变量中的$c
+             * */
+            list($limit, $skip) = pagenate(rq('page'), rq('limit'));
 
             /*
              * 构建query并返回collection数据,laravel会将其转换为json对象

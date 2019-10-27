@@ -45,14 +45,6 @@
         <item name="a_zhihu: schema" type="76f4a085:MysqlImplModel$Schema" />
         <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
       </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="a_zhihu@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="a_zhihu: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="comments: table" type="285a2a93:MysqlImplModel$Table" />
-      </path>
     </expand>
     <select />
   </component>
@@ -64,8 +56,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="84" column="40" selection-start-line="84" selection-start-column="40" selection-end-line="84" selection-end-column="40" />
+            <state relative-caret-position="492">
+              <caret line="51" column="8" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="8" />
               <folding>
                 <element signature="e#7#392#0#PHP" />
               </folding>
@@ -73,14 +65,68 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Model/Question.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-327">
+              <caret line="87" column="45" selection-start-line="87" selection-start-column="45" selection-end-line="87" selection-end-column="45" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Model/Comment.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="82">
+              <caret line="84" column="30" selection-start-line="84" selection-start-column="23" selection-end-line="84" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Model/User.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="479">
-              <caret line="145" selection-start-line="145" selection-end-line="146" selection-end-column="52" />
+            <state relative-caret-position="-403">
+              <caret line="139" column="12" lean-forward="true" selection-start-line="139" selection-start-column="12" selection-end-line="139" selection-end-column="43" />
               <folding>
-                <marker date="1572092016019" expanded="true" signature="1302:1425" ph="..." />
+                <marker date="1572159142657" expanded="true" signature="1302:1425" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Model/Answer.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-187">
+              <caret line="148" column="28" lean-forward="true" selection-start-line="148" selection-start-column="28" selection-end-line="148" selection-end-column="62" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CommonController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="106">
+              <caret line="15" column="14" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="das://620dea2c-2a48-4c08-b68e-bfc8e2c269b3/schema/a_zhihu/table/answers">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="das://620dea2c-2a48-4c08-b68e-bfc8e2c269b3/schema/a_zhihu/table/questions">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
             </state>
           </provider>
         </entry>
@@ -108,17 +154,19 @@
         <option value="$PROJECT_DIR$/database/migrations/2019_10_25_052717_create_table.php" />
         <option value="$PROJECT_DIR$/database/migrations/2019_10_25_095144_create_table_questions.php" />
         <option value="$PROJECT_DIR$/config/app.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2019_10_25_235605_create_table_answers.php" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/620dea2c-2a48-4c08-b68e-bfc8e2c269b3/console_1.sql" />
         <option value="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" />
         <option value="$PROJECT_DIR$/database/migrations/2019_10_26_134657_create_table_comments.php" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/620dea2c-2a48-4c08-b68e-bfc8e2c269b3/console.sql" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
-        <option value="$PROJECT_DIR$/app/Http/routes.php" />
-        <option value="$PROJECT_DIR$/app/Model/Question.php" />
-        <option value="$PROJECT_DIR$/app/Model/Answer.php" />
         <option value="$PROJECT_DIR$/app/Model/Comment.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2019_10_25_235605_create_table_answers.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2019_10_26_205711_create_table_answer_user.php" />
+        <option value="$PROJECT_DIR$/app/Model/Answer.php" />
+        <option value="$PROJECT_DIR$/app/Model/Question.php" />
         <option value="$PROJECT_DIR$/app/Model/User.php" />
+        <option value="$PROJECT_DIR$/app/Http/routes.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/CommonController.php" />
       </list>
     </option>
   </component>
@@ -212,13 +260,20 @@
               <item name="zhihu" type="b2602c69:ProjectViewProjectNode" />
               <item name="zhihu" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Model" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="zhihu" type="b2602c69:ProjectViewProjectNode" />
               <item name="zhihu" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Providers" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
+              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="zhihu" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zhihu" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Model" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="zhihu" type="b2602c69:ProjectViewProjectNode" />
@@ -309,11 +364,13 @@
       <workItem from="1572018485518" duration="10719000" />
       <workItem from="1572063442906" duration="3598000" />
       <workItem from="1572068632627" duration="18369000" />
+      <workItem from="1572093088836" duration="9616000" />
+      <workItem from="1572154149844" duration="5165000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="67916000" />
+    <option name="totallyTimeSpent" value="82697000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -329,7 +386,7 @@
     <editor active="true" />
     <layout>
       <window_info anchor="top" id="Event Log" order="0" sideWeight="0.50358975" side_tool="true" weight="0.38141027" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.20524018" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.37227073" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" weight="0.32969433" />
       <window_info id="Gulp" order="3" side_tool="true" weight="0.32969433" />
@@ -419,34 +476,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2019_10_25_235605_create_table_answers.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="23" column="54" selection-start-line="23" selection-start-column="54" selection-end-line="23" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2019_10_26_134657_create_table_comments.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
-          <caret line="26" column="74" selection-start-line="26" selection-start-column="74" selection-end-line="26" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://620dea2c-2a48-4c08-b68e-bfc8e2c269b3/schema/a_zhihu/table/questions">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://620dea2c-2a48-4c08-b68e-bfc8e2c269b3/schema/a_zhihu/table/answers">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/620dea2c-2a48-4c08-b68e-bfc8e2c269b3/console.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="66">
@@ -461,44 +490,93 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/Question.php">
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_10_25_235605_create_table_answers.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
-          <caret line="52" column="19" lean-forward="true" selection-start-line="52" selection-start-column="19" selection-end-line="52" selection-end-column="60" />
+        <state relative-caret-position="347">
+          <caret line="18" column="64" selection-start-line="18" selection-start-column="64" selection-end-line="18" selection-end-column="64" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/Answer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="601">
-          <caret line="124" column="19" lean-forward="true" selection-start-line="124" selection-start-column="19" selection-end-line="124" selection-end-column="59" />
+    <entry file="das://620dea2c-2a48-4c08-b68e-bfc8e2c269b3/schema/a_zhihu/table/answer_user">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/Comment.php">
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_10_26_205711_create_table_answer_user.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="78" column="56" selection-start-line="78" selection-start-column="56" selection-end-line="78" selection-end-column="56" />
+        <state relative-caret-position="289">
+          <caret line="22" column="70" selection-start-line="22" selection-start-column="70" selection-end-line="22" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_10_26_134657_create_table_comments.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="12" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://620dea2c-2a48-4c08-b68e-bfc8e2c269b3/schema/a_zhihu/table/answers">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://620dea2c-2a48-4c08-b68e-bfc8e2c269b3/schema/a_zhihu/table/questions">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="84" column="40" selection-start-line="84" selection-start-column="40" selection-end-line="84" selection-end-column="40" />
+        <state relative-caret-position="492">
+          <caret line="51" column="8" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="8" />
           <folding>
             <element signature="e#7#392#0#PHP" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/Question.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-327">
+          <caret line="87" column="45" selection-start-line="87" selection-start-column="45" selection-end-line="87" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/Answer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-187">
+          <caret line="148" column="28" lean-forward="true" selection-start-line="148" selection-start-column="28" selection-end-line="148" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Model/User.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="479">
-          <caret line="145" selection-start-line="145" selection-end-line="146" selection-end-column="52" />
+        <state relative-caret-position="-403">
+          <caret line="139" column="12" lean-forward="true" selection-start-line="139" selection-start-column="12" selection-end-line="139" selection-end-column="43" />
           <folding>
-            <marker date="1572092016019" expanded="true" signature="1302:1425" ph="..." />
+            <marker date="1572159142657" expanded="true" signature="1302:1425" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/Comment.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="82">
+          <caret line="84" column="30" selection-start-line="84" selection-start-column="23" selection-end-line="84" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CommonController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="106">
+          <caret line="15" column="14" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
         </state>
       </provider>
     </entry>

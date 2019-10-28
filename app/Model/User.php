@@ -297,17 +297,18 @@ class User extends Model
         /*使用laravel自带validation类进行传参合法性验证*/
 
         /*检查是否传递了用户名*/
-        if(!rq('username'))
-            return err('用户名不能为空!');
+        //if(!rq('username'))
+        //    return err('用户名不能为空!');
 
         /*返回值类型-布尔型*/
-        $user = $this
-            ->where('username', rq('username'))
-            ->exists();
+        //$user = $this
+        //    ->where('username', rq('username'))
+        //   ->exists();
 
-        return $user ?
-            suc(['msg'=>'用户名已存在!']):
-            err('用户名不存在!');
+        //return $user ?
+        //  suc(['msg'=>'用户名已存在!']):
+        //  err('用户名不存在!');
+        return suc(['count'=>$this->where(rq())->count()]);
     }
 
 

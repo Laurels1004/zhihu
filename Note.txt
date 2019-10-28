@@ -79,3 +79,8 @@ php artisan make:migration add_filed_newfiled --table=tablename
             $table->dropColumn('phone_captcha');
         });
     }
+
+
+npm-node package manager
+
+进入/public目录

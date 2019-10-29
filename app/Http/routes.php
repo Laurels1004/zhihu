@@ -76,6 +76,12 @@ function comment_ins(){
     return new App\Model\Comment();
 }
 
+/*验证用户是否登录*/
+function is_signin(){
+    /*session中存在uid,返回uid,否则返回false*/
+    return session('uid') ? : false;
+}
+
 /*api:面向客户端的接口,接口不限制客户端访问方式,可为get可为post
     Route::any('api'function(){}); --不限制客户端访问方式
 */
@@ -106,6 +112,8 @@ Route::any('user/signin', function(){
 Route::any('user/logout', function(){
     return user_ins()->logout();
 });
+
+/*验证用户是否登录*/
 
 /*用户个人信息-游客视角*/
 Route::any('user/info', function(){

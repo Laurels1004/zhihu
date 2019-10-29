@@ -280,8 +280,7 @@ class User extends Model
 
     /*检查用户是否登录*/
     public function is_signin(){
-        /*session中存在uid,返回uid,否则返回false*/
-        return session('uid') ? : false;
+        return is_signin();
     }
 
 

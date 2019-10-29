@@ -50,7 +50,25 @@
                     /*需要的html模板*/
                     //template: '登录'
                     templateUrl: 'signup.tpl'
-                });
+                })
+                /*隐藏question可见状态*/
+                .state('question', {
+                    /*定义为抽象路由,隐藏可见状态*/
+                    abstract:true,
+                    /*地址栏url设置*/
+                    url: '/question',
+                    /*需要template才能插入路由*/
+                    template: '<div ui-view=""></div>'
+                })
+                .state('question.add', {
+                    /*地址栏url设置,访问这个时就查看parent是否含有template且template中是否含有ui-view
+                    * 如果parent中的template含有ui-view,才会插入子路由中的模板
+                    * */
+                    url: '/add',
+                    /*需要的html模板*/
+                    //template: '登录'
+                    templateUrl: 'question.add.tpl'
+                })
         }])
         /*定义服务,所有与User模块相关的功能及数据都放置于此*/
         .service('UserService',[
@@ -186,5 +204,45 @@
                 },true)
             }
         ])
+        .service('QuestionService',[
+            '$state',
+            '$http',
+            function($state, $http){
+                var me = this;
+                me.new_question = {};
+
+                me.go_add_question = function(){
+                    /*当前端页面点击提问按钮时,路由跳转到question.add也就是显示question.add.tpl*/
+                    $state.go('question.add');
+                }
+
+                me.add = function(){
+                    console.log(1);
+                    /*没有question标题直接返回*/
+                    if (!me.new_question.title)
+                        return;
+
+                    /*否则发送ajax请求添加提问*/
+                    $http.post('/question/add',me.new_question)
+                        .then(function (s) {
+                            if(r.data.status){
+                                /*数据重置*/
+                                me.new_question = {};
+                                $state.go('home');
+                            } else {
+
+                            }
+                            console.log(s);
+                        },function(e){
+                            console.log(e);
+                        })
+                }
+            }])
+        .controller('QuestionAddController',[
+            '$scope',
+            'QuestionService',
+            function($scope, QuestionService){
+                $scope.Question = QuestionService;
+            }])
 })();
 

@@ -177,12 +177,17 @@ class Answer extends Model
     }
 
 
+    /*回答关联用户模型-一对多(一个用户可以回答多个问题)*/
+    public function user(){
+        return $this->belongsTo('App\Model\User');
+    }
+
     /* *
      * 一个用户可给多个回答投票
      * 一个回答可被多个用户投票
      * answer : user => N : N 多对多关系
     * */
-    /*回答关联用户模型*/
+    /*回答(投票)关联用户模型-多对多(多个用户对多个问题进行回答)*/
     public function users(){
         /*
          * belongsToMany-回答(Answer)属于多个用户(User)

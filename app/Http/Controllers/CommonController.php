@@ -15,6 +15,7 @@ class CommonController extends Controller
 
         /*获取提问数据*/
         $questions = question_ins()
+            ->with('user')
             ->limit($limit)
             ->skip($skip)
             ->orderBy('created_at', 'DESC')
@@ -22,6 +23,8 @@ class CommonController extends Controller
 
         /*获取回答数据*/
         $answers = answer_ins()
+            ->with('users')
+            ->with('user')
             ->limit($limit)
             ->skip($skip)
             ->orderBy('created_at', 'DESC')
@@ -38,8 +41,6 @@ class CommonController extends Controller
         $data = $data->values()->all();
 
         /*可通过是否含有question_id这个字段判断是否是问题或回答*/
-        return !empty($data) ?
-            suc(['data'=>$data]) :
-            err('当前模块没有数据!');
+        return ['status'=>1, 'data'=>$data];
     }
 }

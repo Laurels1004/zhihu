@@ -110,10 +110,10 @@ class User extends Model
         session()->forget('uid');
 
         /*普通网页应用进行页面跳转*/
-        //return redirect('/');
+        return redirect('/');
 
         /*单页面返回JSON状态码*/
-        return suc();
+//        return suc();
     }
 
 
@@ -130,7 +130,7 @@ class User extends Model
         if(!$user)
             return err('用户不存在!');
 
-        $data = $user->toArray();
+        //$data = $user->toArray();
 
         $answer_count = $user->answers()->count();
         //$answers_count = answer_ins()->where('user_id', rq('id'))->count();

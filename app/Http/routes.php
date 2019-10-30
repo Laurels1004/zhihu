@@ -215,6 +215,22 @@ Route::any('comment/remove', function(){
 Route::any('timeline', 'CommonController@timeline');
 
 
+/*home.tpl*/
+Route::get('tpl/page/home', function(){
+    return view('page.home');
+});
+
+Route::get('tpl/page/signin', function(){
+    return view('page.signin');
+});
+
+Route::get('tpl/page/signup', function(){
+    return view('page.signup');
+});
+
+Route::get('tpl/page/question_add', function(){
+    return view('page.question_add');
+});
 
 /*测试接口*/
 Route::any('test', function(){

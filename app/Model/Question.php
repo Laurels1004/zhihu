@@ -140,4 +140,10 @@ class Question extends Model
             suc() :
             err('提问删除失败!');
     }
+
+
+    /*提问关联用户模型-一对多(一个用户可以提多个问题)*/
+    public function user(){
+        return $this->belongsTo('App\Model\User');
+    }
 }

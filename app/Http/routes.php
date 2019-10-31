@@ -51,7 +51,8 @@ function suc($data_to_merge = []){
     $data = ['status'=>1, 'data'=>[]];
     if($data_to_merge)
         /*如果参数中有数据,则使用array_merge合并,(这个数据是一个数组形式,如['data'=>$data])*/
-        $data['data'] = array_merge($data['data'], $data_to_merge);
+        //$data['data'] = array_merge($data['data'], $data_to_merge);
+        $data['data'] = $data_to_merge;
     /*参数中没有数据时,则直接返回['status'=>1, 'data'=>[]]*/
     return $data;
 }
@@ -245,7 +246,9 @@ Route::any('test', function(){
 //    }
 
 //    dd(user_ins()->is_username_exists('test123'));
-    $a = ['data'=>'123'];
-    $b = ['status'=> '1'];
-    dd(array_merge($a,$b));
+//    $a = ['data'=>'123'];
+//    $b = ['status'=> '1'];
+    $a = 1;
+    $vote = $a != 3 ? $a: 3;
+    dd($vote);
 });

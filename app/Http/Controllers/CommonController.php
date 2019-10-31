@@ -41,6 +41,6 @@ class CommonController extends Controller
         $data = $data->values()->all();
 
         /*可通过是否含有question_id这个字段判断是否是问题或回答*/
-        return ['status'=>1, 'data'=>$data];
+        return suc($data);
     }
 }

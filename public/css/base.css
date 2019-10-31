@@ -188,3 +188,41 @@ button[disabled]{
     text-align: center;
     margin-bottom: 20px;
 }
+.item .vote{
+    float:left;
+    width:10%;
+    padding-right: 5px;
+}
+.item .feed-item-content{
+    float:left;
+    width: 90%;
+}
+.item .hr{
+    float:left;
+}
+.item .vote > * {
+    background:rgba(200,0,0,.1);
+    text-align: center;
+    vertical-align: middle;
+    border-radius:3px;
+    margin-bottom: 2px;
+    cursor: pointer;
+    transition: all 0.3s linear;
+    padding: 3px 0;
+}
+.item .vote .vote-up{
+    color:#6f0b00;
+}
+.item .vote .vote-up:hover{
+    background:#a10;
+    color:#fff;
+}
+.item .vote .vote-down{
+    background: rgba(0,0,0,.1);
+    color:#555;
+}
+.item .vote .vote-down:hover{
+    background: rgba(0,0,0,.7);
+    color:#fff;
+}
+

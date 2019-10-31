@@ -85,9 +85,12 @@ class Answer extends Model
         /*检查是否传递了回答ID,有返回对应ID的回答数据*/
         if(rq('id')){
             /*查看某个回答*/
-            $answer =$this->find(rq('id'));
+            $answer =$this
+                ->with('users')
+                ->with('user')
+                ->find(rq('id'));
             return $answer ?
-                suc(['data'=>$answer]):
+                suc($answer):
                 err('查看的回答不存在');
         }
 
@@ -100,10 +103,9 @@ class Answer extends Model
             ->where('question_id', rq('question_id'))
             ->get()
             ->keyBy('id');
-
         /*返回数据*/
         return !$answers->isEmpty() ?
-            suc(['data'=>$answers]):
+            suc($answers):
             err('该问题下还没有回答!');
     }
 
@@ -152,8 +154,10 @@ class Answer extends Model
         $answer = $this->find(rq('id'));
         if(!$answer) return err('所投票的回答不存在!');
 
-        /*对投票进行处理 1赞成,2反对*/
-        $vote = rq('vote') <= 1 ? 1 : 2;
+        /*对投票进行处理 1赞成,2反对,否则3取消*/
+        $vote = rq('vote') != 3 ? rq('vote') : 3;
+        if($vote !=1 && $vote != 2 && $vote != 3)
+            $vote = 3;
 
         /*检查用户是否已经投过票*/
         /*newPivotStatement()-进入中间表进行操作,也就是对链接表操作*/
@@ -163,6 +167,10 @@ class Answer extends Model
                 'user_id'=>session('uid'),
                 'answer_id'=>rq('id')])
             ->delete();
+
+        /*如果是3,则终止操作*/
+        if($vote == 3)
+            return suc();
 
         /*进行数据添加*/
         /**

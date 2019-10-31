@@ -5,14 +5,17 @@
     <div class="hr"></div>
     <div class="item-set">
         {{--ng-repeat相当于for--}}
-        <div ng-repeat="data in Timeline.data" class="item">
-            <div class="vote"></div>
+        <div ng-repeat="data in Timeline.data track by $index" class="item clearfix">
+            <div ng-if="data.question_id" class="vote">
+                <div ng-click="Timeline.vote({id:data.id, vote:1})" class="vote-up">👍&nbsp;[: data.upvote_count :]</div>
+                <div ng-click="Timeline.vote({id:data.id, vote:2})" class="vote-down">👎&nbsp;[: data.downvote_count :]</div>
+            </div>
             <div class="feed-item-content">
-                <div ng-if="item.question_id" class="content-active">[: data.user.username :]添加了提问</div>
-                <div ng-if="!item.question_id" class="content-active">[: data.user.username :]添加了回答</div>
+                <div ng-if="data.question_id" class="content-active">用户:&nbsp;[: data.user.username :]添加了回答</div>
+                <div ng-if="!data.question_id" class="content-active">用户:&nbsp;[: data.user.username :]添加了提问</div>
                 <div class="title">[: data.title :]</div>
                 <div class="content-owner">[: data.user.username :]</div>
-                <div class="content-main">[: data.desc :]</div>
+                <div class="content-main">[: data.desc :][: data.content :]</div>
                 <div class="action-set">
                     <div class="comment">评论</div>
                 </div>

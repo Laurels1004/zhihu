@@ -1,6 +1,6 @@
 <!doctype html>
 {{--ng-app-声明angular应用名,模块名称--}}
-<html lang="zh" ng-app="myApp">
+<html lang="zh" ng-app="myApp" user-id="{{ session('uid') }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -17,6 +17,7 @@
     <script src="/js/common.js"></script>
     <script src="/js/user.js"></script>
     <script src="/js/question.js"></script>
+    <script src="/js/answer.js"></script>
     {{--CND资源--}}
     {{--<link rel="stylesheet" href="https://cdn.bootcss.com/normalize/3.0.3/normalize.css">--}}
     {{--<link rel="stylesheet" href="/css/base.css">--}}

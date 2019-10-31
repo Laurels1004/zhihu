@@ -7,7 +7,8 @@
     'ui.router',
     'common',
     'user',
-    'question'
+    'question',
+    'answer'
     ])
     /* *
     * 注入依赖.config中的interpolateProvider,用于angular中的解析

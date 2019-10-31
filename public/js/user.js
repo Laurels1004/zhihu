@@ -51,7 +51,7 @@
                                 * */
                                 /*跳转至登录页*/
                                 $state.go('home');
-                                location.href = '/';
+                                //location.href = '/';
                             }else{
                                 me.signin_failed = true;
                             }
